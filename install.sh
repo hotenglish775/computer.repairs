@@ -126,6 +126,38 @@ check_requirements() {
     success "System requirements check passed"
 }
 
+# Clean project function to resolve webpack caching issues
+clean_project() {
+    log "Cleaning project to resolve potential caching issues..."
+    
+    # Remove node_modules directory
+    if [[ -d "node_modules" ]]; then
+        info "Removing node_modules directory..."
+        rm -rf node_modules
+        success "node_modules directory removed"
+    fi
+    
+    # Remove package-lock.json
+    if [[ -f "package-lock.json" ]]; then
+        info "Removing package-lock.json..."
+        rm -f package-lock.json
+        success "package-lock.json removed"
+    fi
+    
+    # Remove .next build cache
+    if [[ -d ".next" ]]; then
+        info "Removing .next build cache..."
+        rm -rf .next
+        success ".next build cache removed"
+    fi
+    
+    # Remove npm cache (optional but helpful)
+    info "Clearing npm cache..."
+    npm cache clean --force 2>/dev/null || true
+    
+    success "Project cleaned successfully"
+}
+
 # Check and install Node.js
 check_nodejs() {
     log "Checking Node.js installation..."
@@ -371,6 +403,7 @@ main() {
     check_requirements
     check_nodejs
     check_npm
+    clean_project
     configure_environment
     install_dependencies
     build_project
