@@ -299,8 +299,8 @@ export const portfolioProjects: PortfolioProject[] = [
   }
 ];
 
-// Service-specific testimonials
-export const serviceTestimonials = {
+// Service-specific testimonials with explicit type annotation
+export const serviceTestimonials: Record<string, Testimonial[]> = {
   'screen-replacement': [
     {
       id: 'screen-1',
@@ -392,7 +392,7 @@ export const serviceTestimonials = {
 };
 
 // Related services mapping
-export const relatedServices = {
+export const relatedServices: Record<string, string[]> = {
   'screen-replacement': ['battery-replacement', 'camera-repair', 'charging-port-repair'],
   'battery-replacement': ['screen-replacement', 'charging-port-repair', 'mobile-software-troubleshooting'],
   'charging-port-repair': ['battery-replacement', 'screen-replacement', 'water-damage-repair'],
